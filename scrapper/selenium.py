@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from .models import PlayerGoalScore
 
@@ -10,20 +11,23 @@ fields = ['rank', 'player_name', 'goals_scored', 'assists', 'minutes_played', 'm
 
 
 def scrap():
-    # chrome_options = Options()
-    # chrome_options.add_argument("--headless")
+    options = Options()
+    options.add_argument("--headless")
 
     # Inicializa webdriver
     yield 'Inicializando Browser<br /><br />'
 
-    driver = webdriver.Chrome(chrome_options=None)
+    driver = webdriver.Chrome(chrome_options=options)
     # Aguarda o browser
     driver.implicitly_wait(30)
+
     # Entra na URL
+    yield f'Entrando na URL: {url}<br />'
     driver.get(url)
 
-    yield f'Entrando na URL: {url}<br />'
+
     wait = WebDriverWait(driver, 15)
+
     pagination_base = driver.find_element_by_id('goal-scored_paginate')
     pagination_items = pagination_base.find_elements_by_xpath('.//a')
 
@@ -57,6 +61,8 @@ def scrap():
 
                 yield f'{goal["rank"]}, '
     driver.close()
+
+    yield '<br /><br />Atualizando banco de dados...'
 
     PlayerGoalScore.objects.all().delete()
     for goal in goals:
