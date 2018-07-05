@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.http import StreamingHttpResponse
+from .selenium import scrap
 
-# Create your views here.
+
+def start(request):
+    return StreamingHttpResponse(scrap())
