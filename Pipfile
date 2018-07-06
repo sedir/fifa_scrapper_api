@@ -6,7 +6,12 @@ name = "pypi"
 [packages]
 django = "*"
 selenium = "*"
+<<<<<<< HEAD
 gunicorn = "*"
+=======
+djangorestframework = "*"
+django-rest-swagger = "*"
+>>>>>>> d519b163b2edce311e95b57debeb8215e7d195b4
 
 [dev-packages]
 

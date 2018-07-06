@@ -19,7 +19,7 @@ def scrap():
     # Inicializa webdriver
     yield 'Inicializando Browser<br /><br />'
 
-    driver = webdriver.Chrome(chrome_options=options, executable_path=chrome_exec_shim)
+    driver = webdriver.Chrome(chrome_options=options)
     # Aguarda o browser
     driver.implicitly_wait(30)
 
