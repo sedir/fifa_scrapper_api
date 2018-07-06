@@ -1,0 +1,1 @@
+web: gunicorn fifa_api.wsgi --timeout 200

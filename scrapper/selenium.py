@@ -1,8 +1,10 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from .models import PlayerGoalScore
 
+chrome_exec_shim = os.environ.get("GOOGLE_CHROME_BIN", "chromedriver")
 
 url = "https://www.fifa.com/worldcup/statistics/players/goal-scored"
 
@@ -17,14 +19,13 @@ def scrap():
     # Inicializa webdriver
     yield 'Inicializando Browser<br /><br />'
 
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome(chrome_options=options, executable_path=chrome_exec_shim)
     # Aguarda o browser
     driver.implicitly_wait(30)
 
     # Entra na URL
     yield f'Entrando na URL: {url}<br />'
     driver.get(url)
-
 
     wait = WebDriverWait(driver, 15)
 
