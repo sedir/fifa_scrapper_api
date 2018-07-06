@@ -9,6 +9,7 @@ selenium = "*"
 gunicorn = "*"
 djangorestframework = "*"
 django-rest-swagger = "*"
+whitenoise = "*"
 
 [dev-packages]
 
