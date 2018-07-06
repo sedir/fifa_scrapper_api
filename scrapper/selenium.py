@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.wait import WebDriverWait
 from .models import PlayerGoalScore
 
-chrome_bin = os.environ.get('GOOGLE_CHROME_SHIM', None)
+chrome_bin = os.environ.get('GOOGLE_CHROME_SHIM', 'google-chrome-stable')
 
 url = "https://www.fifa.com/worldcup/statistics/players/goal-scored"
 
@@ -15,7 +15,6 @@ fields = ['rank', 'player_name', 'goals_scored', 'assists', 'minutes_played', 'm
 def scrap():
     options = Options()
     options.binary_location = chrome_bin
-    options.add_argument("--headless")
 
     # Inicializa webdriver
     yield 'Inicializando Browser<br /><br />'
