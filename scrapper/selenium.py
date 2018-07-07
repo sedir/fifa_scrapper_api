@@ -14,7 +14,8 @@ fields = ['rank', 'player_name', 'goals_scored', 'assists', 'minutes_played', 'm
 
 def scrap():
     options = Options()
-    # options.binary_location = chrome_bin
+    if os.environ.get('DOKKU_NGINX_PORT'):
+        options.binary_location = chrome_bin
 
     # Inicializa webdriver
     yield 'Inicializando Browser<br /><br />'
