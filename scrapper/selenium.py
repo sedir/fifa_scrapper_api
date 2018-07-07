@@ -14,7 +14,7 @@ fields = ['rank', 'player_name', 'goals_scored', 'assists', 'minutes_played', 'm
 
 def scrap():
     options = Options()
-    options.binary_location = chrome_bin
+    # options.binary_location = chrome_bin
 
     # Inicializa webdriver
     yield 'Inicializando Browser<br /><br />'
@@ -30,17 +30,18 @@ def scrap():
     wait = WebDriverWait(driver, 15)
 
     pagination_base = driver.find_element_by_id('goal-scored_paginate')
-    pagination_items = pagination_base.find_elements_by_xpath('.//a')
+    num_pages = len(pagination_base.find_elements_by_xpath('.//a'))
 
     goals_table = driver.find_element_by_id('goal-scored')
 
     goals = []
 
-    for number, page in enumerate(pagination_items):
+    for page in range(num_pages):
+        pages = pagination_base.find_elements_by_xpath('.//a')
 
-        yield f'<br /><br />Lendo página {number+1}<br />'
+        yield f'<br /><br />Lendo página {page+1}<br />'
 
-        driver.execute_script("arguments[0].click();", page)
+        driver.execute_script("arguments[0].click();", pages[page])
         # page.click()
         driver.implicitly_wait(2)
 
